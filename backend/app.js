@@ -3,6 +3,7 @@ const mongoose = require('mongoose'); //MongoDB Bdd
 
 const authRoutes = require('./routes/auth');
 const sauceRoutes = require('./routes/sauces');
+const path = require('path');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
 
 app.use(express.json()); //Définir comme midlwre global
 
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/auth', authRoutes); // Routes liées à l'authentification
 app.use('/api/sauces', sauceRoutes);
 module.exports = app;
