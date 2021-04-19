@@ -31,12 +31,17 @@ exports.signup = (req, res, next) => { // Fonction pour l'enregistrement de l'us
               userId: user._id,
               token: jwt.sign( //fonction de jsonwebtoken avec comme arguments :
                 { userId: user._id }, // les données que l’on veut encoder dont l'userId
-                'RANDOM_TOKEN_SECRET', // clé secrète pour l’encodage
+                process.env.JWT_SECRET, // clé secrète pour l’encodage
                 { expiresIn: '24h' } // configuration du délai d’expiration du token
-              )
+              ),
+              email: req.body.email
             });
           })
           .catch(error => res.status(500).json({ error }));
       })
       .catch(error => res.status(500).json({ error }));
   };
+
+  function maskEmail(email){
+    
+  }
