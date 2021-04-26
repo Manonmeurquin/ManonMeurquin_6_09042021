@@ -54,7 +54,7 @@ exports.likeDislikeSauce = (req, res, next) => {
   const userId = req.body.userId;
   const sauceId = req.params.id;
 
-  switch (like) { // /!\ ID DE LA SAUCE + NE PAS POUVOIR LIKER ET DISLIKER EN MEME TEMPS 
+  switch (like) {  
     case 1: Sauce.updateOne({ _id: sauceId }, { $inc: { likes: 1 }, $push: { usersLiked: userId } })
       .then(() => res.status(200).json({ message: 'Sauce likée !' }))
       .catch(error => res.status(400).json({ error }));
