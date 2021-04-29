@@ -7,7 +7,7 @@ const rateLimit = require("express-rate-limit"); // Sert à limiter les requête
 
 const limiter = rateLimit({ // Je limite les requêtes envoyées par l'utilisateur
     windowMs:60 * 60 * 1000, // 1 heure
-    max: 50, // limite à 50 requêtes
+    max: 50, // limite à 100 requêtes
     message: "Too many request "
 });
 
