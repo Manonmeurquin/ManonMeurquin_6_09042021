@@ -1,7 +1,7 @@
 require('dotenv').config(); // Charge les variables d'environnement à partir du fichier .env et .env-mentor
 const express = require('express');
 const mongoose = require('mongoose'); //MongoDB Bdd
-const rateLimit = require("express-rate-limit"); // Sert à limiter les requêtes
+
 const helmet = require('helmet'); // Sécrurise l'en-tête contre les attaques XSS
 
 const authRoutes = require('./routes/auth');
@@ -19,13 +19,6 @@ mongoose.connect(`mongodb+srv://${process.env.MONGODB_NAME}:${process.env.MONGOD
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-const limiter = rateLimit({ // Je limite les requêtes envoyées par l'utilisateur
-    windowMs: 60 * 1000, // 1 minute
-    max: 100, // limite à 100 requêtes
-    message: "Too many request "
-});
-
-app.use(limiter);
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*'); //Accéder à l’API depuis n’importe quelle origine
