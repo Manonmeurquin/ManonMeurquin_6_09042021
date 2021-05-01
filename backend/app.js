@@ -10,6 +10,15 @@ const path = require('path'); // Permet d'accéder aux chemins des fichiers (ici
 
 const app = express();
 
+const rateLimit = require("express-rate-limit"); // Sert à limiter les requêtes
+
+const limiter = rateLimit({ // Je limite les requêtes envoyées par l'utilisateur
+    windowMs:60 * 60 * 1000, // 1 heure
+    max: 100, // limite à 100 requêtes
+    message: "Too many request "
+});
+
+app.use(limiter);
 
 mongoose.connect(`mongodb+srv://${process.env.MONGODB_NAME}:${process.env.MONGODB_PWD}@cluster0.vrg0b.mongodb.net/SoPekocko?retryWrites=true&w=majority`,
     {
