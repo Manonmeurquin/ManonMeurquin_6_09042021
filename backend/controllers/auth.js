@@ -2,6 +2,14 @@ const User = require('../models/User'); // On importe le modèle
 const bcrypt = require('bcrypt'); // Package de cryptage
 const jwt = require('jsonwebtoken'); //Package de création et de vérification des token
 
+const rateLimit = require("express-rate-limit"); // Sert à limiter les requêtes
+
+const limiter = rateLimit({ // Je limite les requêtes envoyées par l'utilisateur
+    windowMs:60 * 60 * 1000, // 1 heure
+    max: 100, // limite à 100 requêtes
+    message: "Too many request "
+});
+
 //Package de validation du mdp
 const passwordValidator = require('password-validator');
 let schemaPasswordValidator = new passwordValidator();
